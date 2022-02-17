@@ -55,7 +55,7 @@ const EditBlog = ({
             <i className='fas fa-user'></i> 
             </div>
             <div class="col-lg-12 login-title">
-            Edit Your Profile
+            Edit Your Blog
             </div>
 
             <div class="col-lg-12 login-form">
@@ -84,7 +84,7 @@ const EditBlog = ({
             value={Text}
             onChange={(e) => onChange(e)}
           />
-          <small className='form-text'>Tell us a little about yourself</small>
+        
         </div>
 
         
