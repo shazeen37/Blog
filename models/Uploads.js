@@ -7,28 +7,16 @@ const UploadSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'user',
     },
-    video: {
+    image: {
       type: String,
     },
-    gestureName: {
+    Name: {
       type: String,
     },
-    category: {
+    
+    Text: {
       type: String,
-      default: 'general',
-    },
-    Region: {
-      type: String,
-      default: 'punjab',
-    },
-    status: {
-      type: String,
-      default: 'Pending',
-    },
-    rating: {
-      type: Number,
-      enum: [1, 2, 3, 4, 5],
-      default: 1
+      default: 'blog.....',
     },
     date: {
       type: Date,

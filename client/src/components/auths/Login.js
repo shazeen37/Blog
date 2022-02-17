@@ -26,37 +26,55 @@ const Login = ({ login, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <h1 className='large text-primary'>Login</h1>
-      <p className='lead'>
-        <i className='fas fa-user'></i> Login In Your Account
-      </p>
-      <form className='form' onSubmit={(e) => onSubmit(e)}>
-        <div className='form-group'>
-          <input
-            type='email'
-            placeholder='Email Address'
-            name='email'
-            value={email}
-            onChange={(e) => onChange(e)}
-            required
-          />
-        </div>
-        <div className='form-group'>
-          <input
-            type='password'
-            placeholder='Password'
-            name='password'
-            value={password}
-            onChange={(e) => onChange(e)}
-            minLength='6'
-          />
-        </div>
+    <div class="containerlogin">
+        
+        <div class="col-lg-3 col-md-2"></div>
+        <div class="col-lg-4 col-md-8 login-box">
+            <div class="col-lg-12 login-key">
+            <i className='fas fa-user'></i> 
+            </div>
+            <div class="col-lg-12 login-title">
+            Sign Up
+            </div>
 
-        <input type='submit' className='btn btn-primary' value='Login' />
-      </form>
-      <p className='my-1'>
-        Dont have an account? <Link to='/Register'>Sign Up</Link>
+            <div class="col-lg-12 login-form">
+                <div class="col-lg-12 login-form">
+                    <form onSubmit={(e) => onSubmit(e)}>
+                    <div class="form-group">
+                            <label class="form-control-label">EMAIL</label>
+                            <input type="text"  placeholder='Enter Email Address'
+        name='email'
+        value={email}
+        onChange={(e) => onChange(e)}class="form-control" required/>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-control-label">PASSWORD</label>
+                            <input type="password" class="form-control" placeholder=' Enter Password'
+        name='password'
+        value={password}
+        onChange={(e) => onChange(e)} required/>
+        
+        <p className='my-1'>
+        Don't have an account? <Link to='/register'>Sign Up</Link>
       </p>
+                        </div>
+            
+                        <div class="col-lg-12 loginbttm">
+                            
+                            <div class="col-lg-12 login-btm login-button">
+                                <button type="submit" class="btn-primaryLL ">Login</button>
+                            </div>
+                          
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-2"></div>
+        </div>
+    </div>
+
+     
     </Fragment>
   );
 };

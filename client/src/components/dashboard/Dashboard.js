@@ -30,30 +30,28 @@ const Dashboard = ({
     <Fragment>
       {(!profile && !hasProfile) && <Redirect to='/Createprofile' />}
       {user && profile && <div className='dashboard'>
+        <div class='containerpk'>
+        <div class="row">
+     
         <div className='profile-header'>
-          <div className='profile-img'>
-            <img src={user.avatar} alt='image 1/' width='200' />
-          </div>
-          <div className='profile-nav-info'>
+         
+          
+        </div>
+        </div>
+       
+        <div className='main-bd row'>
+          <div className='col-12 col-md-3 left-side'>
+            <div className='profile-side'>
+            
+            <img src={user.avatar} alt='image 1/' className='profile-imgk' width='200' />
+            <div className='profile-nav-info'>
             <h3 className='user-name'> {user.name}</h3>
-            <div className='address'>
-              <p className='state'>
+            <p className='state'>
                 {' '}
                 {profile.status},
                 <span className='country'> {profile.location}</span>
               </p>
-            </div>
           </div>
-          <div className='profile-option'>
-            <div className='notification'>
-              <i className='fa fa-bell'></i>
-              <span className='alert-message'>1</span>
-            </div>
-          </div>
-        </div>
-        <div className='main-bd'>
-          <div className='left-side'>
-            <div className='profile-side'>
               <p className='mobile-no'>
                 <i className='fa fa-phone'> +9328937209320</i>
               </p>
@@ -82,7 +80,7 @@ const Dashboard = ({
             </div>
           </div>
 
-          <div className='right-side'>
+          <div className='col-12 col-md-9 right-side'>
             <div className='navi'>
               <ul>
                 <li
@@ -118,7 +116,7 @@ const Dashboard = ({
               )}
               {displayuserreview ? (
                 <Fragment>
-                  <div className='tabcontainer'>
+                  <div>
                     <Review />
                   </div>
                 </Fragment>
@@ -128,7 +126,10 @@ const Dashboard = ({
             </div>
           </div>
         </div>
-      </div>}
+        </div>
+      
+      </div>
+      }
     </Fragment>
   );
 };

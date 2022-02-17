@@ -7,7 +7,7 @@ import store from '../../store';
 import Alerts from '../../components/layout/Alerts';
 import setAuthToken from '../../utils/setAuthToken';
 import UploadsUI from './UploadUI';
-import './UploadsStyles.css';
+
 
 import { loadUser } from '../../actions/auth';
 if (localStorage.token) {
@@ -22,18 +22,23 @@ const Uploads = ({ getUploads,id,uploads: { uploads, loading } }) => {
     <div>Loading ....</div>
   ) : (
     <Fragment>
-      <div className='containier-fluid d-flex justify-content-center'>
-        <div className='row'>
-          <div className='col'>
-            <div className='col-md-4'>
+     <section class="page-section bg-light_pink" id="portfolio">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">You'r Cookbook</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+           <div className='row'>
+     
               {' '}
               {uploads.map((uploads) => (
                 <UploadsUI key={uploads._id} uploads={uploads} />
               ))}
             </div>
-          </div>
-        </div>
+          
       </div>
+      </section>
+     
     </Fragment>
   );
 };

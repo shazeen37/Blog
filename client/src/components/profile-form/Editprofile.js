@@ -63,11 +63,20 @@ const Editprofile = ({
 
   return (
     <Fragment>
-      <h1 className='large text-primary'>Create Your Profile</h1>
-      <p className='lead'>
-        <i className='fas fa-user' /> Let's get some information to make your
-        profile stand out
-      </p>
+     <div class="containerlogin">
+        
+        <div class="col-lg-3 col-md-2"></div>
+        <div class="col-lg-4 col-md-8 login-box">
+        <div class="col-lg-12 login-key">
+            <i className='fas fa-user'></i> 
+            </div>
+            <div class="col-lg-12 login-title">
+            Edit Your Profile
+            </div>
+
+            <div class="col-lg-12 login-form">
+                <div class="col-lg-12 login-form">
+     
       <small>* = required field</small>
       <form className='form' onSubmit={(e) => onSubmit(e)}>
         <div className='form-group'>
@@ -184,6 +193,12 @@ const Editprofile = ({
           Go Back
         </Link>
       </form>
+
+      </div>
+            </div>
+            <div class="col-lg-3 col-md-2"></div>
+        </div>
+    </div>
     </Fragment>
   );
 };

@@ -23,29 +23,28 @@ var upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
     if (
-      file.mimetype == 'video/mp4' ||
-      file.mimetype == 'Video/mpg' ||
-      file.mimetype == 'video/avi' ||
-      file.mimetype == 'video/mov'
+      file.mimetype == 'image/png' ||
+      file.mimetype == 'image/gif' ||
+      file.mimetype == 'image/jpeg'
     ) {
       cb(null, true);
     } else {
       cb(null, false);
-      return cb(new Error('Only .mp4, .mpg and .avi format allowed!'));
+      return cb(new Error('Only .GIF, .PNG and .JPEG format allowed!'));
     }
   },
 });
 
 // uploads
-router.post('/', auth, upload.single('video'), async (req, res, next) => {
+router.post('/', auth, upload.single('image'), async (req, res, next) => {
   const url = req.protocol + '://' + req.get('host');
   const user = await Users.findById(req.user.id).select('-password');
 
   const userupload = new uploads({
     user: req.user.id,
-    gestureName: req.body.gestureName,
-    video: url + '/public/' + req.file.filename,
-    Region:req.body.Region,
+    Name: req.body.Name,
+    image: url + '/public/' + req.file.filename,
+    Text:req.body.Text,
   });
 
   userupload
@@ -74,7 +73,7 @@ router.post('/', auth, upload.single('video'), async (req, res, next) => {
       });
   
       const mailOptions = {
-        from: 'learnwithus03@gmail.com',
+        from: 'shahzeenahmed031@gmail.com',
         to: editor.email,
         subject: 'PSL!!! New gesture assigned',
         html: `<!doctype html>  <html lang="en-US">
@@ -123,7 +122,7 @@ router.post('/', auth, upload.single('video'), async (req, res, next) => {
                                                  <span
                                                      style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
                                                  <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                                 A new gesture is ready to be reviewed and is assigned to you. Please review the gesture as soon as possible.
+                                                Your new Blog is Uploded!
                                                  </p>
                                              </td>
                                          </tr>
@@ -160,11 +159,7 @@ router.post('/', auth, upload.single('video'), async (req, res, next) => {
         } else {
           res.status(201).json({
             message: 'uploads successfully!',
-            useruploadCreated: {
-              user: result.user,
-              video: result.video,
-              gestureName: result.gestureName,
-            },
+            
           });
         }
       });
@@ -188,26 +183,75 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/indiviual', async (req, res) => {
-  try {
-    const upload = await uploads.findOne({ status: 'Pending' });
-
-    if (!upload) {
-      return res.status(404).json({
-        msg: 'upload not found',
-      });
+//edit uplodad
+router.post(
+  '/edit',
+  [[check('Text', 'Text is required').not().isEmpty()]],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
-    res.json(upload);
+
+    const {
+      Text,
+      Name,
+      id
+    } = req.body;
+
+    const uploadsFields = {};
+    uploadsFields.id = id;
+    if (Name) uploadsFields.Name = Name;
+    if (Text) uploadsFields.Text = Text;
+  
+   
+    
+
+    try {
+      let Uploads = await uploads.findById(id);
+     
+      //update
+      if (Uploads) {
+        let Upload = await uploads.findOneAndUpdate(
+          { _id: id },
+          { $set: uploadsFields },
+          { new: true }
+        );
+        return res.json(uploads);
+      }
+
+      
+      await Upload.save();
+      
+      res.json(Upload);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('server Error');
+    }
+  }
+);
+
+// @route    DELETE api/posts/:id
+// @desc     Delete a post
+// @access   Private
+router.delete('/:id', async (req, res) => {
+  try {
+    const post = await uploads.findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).json({ msg: 'Post not found' });
+    }
+
+    await post.remove();
+
+    res.json({ msg: 'Post removed' });
   } catch (err) {
     console.error(err.message);
-    if (err.kind === 'ObjectId') {
-      return res.status(404).json({
-        msg: 'upload not found',
-      });
-    }
+
     res.status(500).send('Server Error');
   }
 });
+
 
 //get user uploads
 router.get('/:id', async (req, res) => {
@@ -229,5 +273,43 @@ router.get('/:id', async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+//get user uploads
+router.get('/single/:id', async (req, res) => {
+  try {
+    const Uploads = await uploads.findById(req.params.id).sort({ date: -1 });;
+    if (!Uploads) {
+      return res.status(404).json({
+        msg: 'Uploads not found',
+      });
+    }
+    res.json(Uploads);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({
+        msg: 'Uploads not found',
+      });
+    }
+    res.status(500).send('Server Error');
+  }
+});
+
+
+//get user uploads for landing page
+router.get('/last/five/uploads', async (req, res) => {
+  try {
+    const Uploads = await uploads.find().sort({ date: -1 }).limit(6);
+    res.json(Uploads);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+
+
+
 
 module.exports = router;

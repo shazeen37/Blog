@@ -1,7 +1,7 @@
 {
   "name": "psl",
   "version": "1.0.0",
-  "description": "Crowd Sourcing PSL",
+  "description": "Blog",
   "main": "server.js",
   "scripts": {
     "start": "node server",

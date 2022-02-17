@@ -32,61 +32,76 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   }
   return (
     <Fragment>
-      <h1 className='large text-primary'>Sign Up</h1>
-      <p className='lead'>
-        <i className='fas fa-user'></i> Create Your Account
-      </p>
-      <form className='form' onSubmit={(e) => onSubmit(e)}>
-        <div className='form-group'>
-          <input
-            type='text'
-            placeholder='Name'
+       <div class="containerlogin">
+        
+        <div class="col-lg-3 col-md-2"></div>
+        <div class="col-lg-4 col-md-8 login-box">
+            <div class="col-lg-12 login-key">
+            <i className='fas fa-user'></i> 
+            </div>
+            <div class="col-lg-12 login-title">
+            Sign Up
+            </div>
+
+            <div class="col-lg-12 login-form">
+                <div class="col-lg-12 login-form">
+                    <form onSubmit={(e) => onSubmit(e)}>
+                    <div class="form-group">
+                            <label class="form-control-label">EMAIL</label>
+                            <input type="text"  placeholder='Enter Email Address'
+        name='email'
+        value={email}
+        onChange={(e) => onChange(e)}class="form-control" required/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">NAME</label>
+                            <input type="text"  type='text' 
+            placeholder='Enter Name'
             name='name'
             value={name}
             onChange={(e) => onChange(e)}
-            //required
-          />
-        </div>
-        <div className='form-group'>
-          <input
-            type='email'
-            placeholder='Email Address'
-            name='email'
-            value={email}
-            onChange={(e) => onChange(e)}
-            // required
-          />
-          <small className='form-text'>
-            This site uses Gravatar so if you want a profile image, use a
-            Gravatar email
-          </small>
-        </div>
-        <div className='form-group'>
-          <input
-            type='password'
-            placeholder='Password'
-            name='password'
-            value={password}
-            onChange={(e) => onChange(e)}
-            minLength='6'
-          />
-        </div>
-        <div className='form-group'>
-          <input
-            type='password'
-            placeholder='Confirm Password'
-            name='password2'
-            value={password2}
-            onChange={(e) => onChange(e)}
-            minLength='6'
-          />
-        </div>
-
-        <input type='submit' className='btn btn-primary' value='Register' />
-      </form>
-      <p className='my-1'>
+    class="form-control" required/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">PASSWORD</label>
+                            <input type="password" class="form-control" placeholder=' Enter Password'
+        name='password'
+        value={password}
+        onChange={(e) => onChange(e)} required/>
+        
+        
+                        </div>
+                        <div class="form-group">
+                            
+                            <input type="password" class="form-control" placeholder='Confirm Password'
+        name='password2'
+        value={password2}
+        onChange={(e) => onChange(e)} 
+        required
+        
+        />
+        <p className='my-1'>
         Already have an account? <Link to='/Login'>Sign In</Link>
       </p>
+        
+    
+                        </div>
+                        <div class="col-lg-12 loginbttm">
+                            
+                            <div class="col-lg-12 login-btm login-button">
+                                <button type="submit" class="btn-primaryLL ">Login</button>
+                            </div>
+                          
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-2"></div>
+        </div>
+    </div>
+
+
+
     </Fragment>
   );
 };

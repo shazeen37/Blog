@@ -27,3 +27,10 @@ export const CANCEL_SEARCH = 'CANCEL_SEARCH';
 export const SEARCH_ERROR = 'SEARCH_ERROR';
 export const GET_SENTENSE =  'GET_SENTENSE';
 export const GET_SENTENSE_ERROR =  'GET_SENTENSE_ERROR';
+export const GET_SINGLE =  'GET_SINGLE';
+export const GET_SINGLE_ERROR =  'GET_SINGLE_ERROR';
+export const GET_BLOGS =  'GET_BLOGS';
+export const GET_BLOGS_ERROR =  'GET_BLOGS_ERROR';
+export const GET_ALL_BLOGS =  'GET_ALL_BLOGS';
+export const GET_ALL_BLOGS_ERROR =  'GET_ALL_BLOGS_ERROR';
+

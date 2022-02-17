@@ -12,7 +12,8 @@ const expressValidator = require('express-validator');
 //app.set('view engine', ejs);
 
 //connect Database
-connectDB();
+connectDB()
+
 
 //Middleware
 

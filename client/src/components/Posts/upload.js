@@ -12,42 +12,43 @@ export default class FilesUploadComponent extends Component {
     this.onFileChange = this.onFileChange.bind(this);
 
     this.onNameChange = this.onNameChange.bind(this);
-    this.onRegionChange = this.onRegionChange.bind(this);
+    this.onTextChange = this.onTextChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
-      video: '',
-      gestureName: '',
+      image: '',
+      Name: '',
       selectFile: null,
-      Region:'',
+      Text:'',
       loaded: 0,
     };
   }
 
   onFileChange(e) {
-    this.setState({ video: e.target.files[0] });
+    this.setState({ image: e.target.files[0] });
 
     //this.setState({ gestureName: e.target.gestureName });
     //console.log(e.target.gestureName);
   }
   onNameChange(e) {
-    this.setState({ gestureName: e.target.value });
+    this.setState({ Name: e.target.value });
     console.log(e.target.value);
     //console.log('The link was clicked.');
   }
-  onRegionChange(e) {
-    this.setState({ Region: e.target.value });
+  onTextChange(e) {
+    this.setState({ Text: e.target.value });
     console.log(e.target.value);
     //console.log('The link was clicked.');
   }
+
 
   onSubmit(e) {
     e.preventDefault();
 
     let formData = new FormData();
     console.log('type: ', typeof this.state.video);
-    formData.append('video', this.state.video, this.state.video.name);
-    formData.append('gestureName', this.state.gestureName);
-    formData.append('Region', this.state.Region);
+    formData.append('image', this.state.image, this.state.image.name);
+    formData.append('Name', this.state.Name);
+    formData.append('Text', this.state.Text);
     console.log('state: ', this.state);
     axios
       .post('http://localhost:5000/api/upload', formData, {
@@ -60,17 +61,26 @@ export default class FilesUploadComponent extends Component {
       .then((res) => {
         console.log(res);
         toast.success(
-          'Uploaded successfully! Your Gesture Video is submitted for reviewing. Once our Expertes Approved it, it will be pulbliched on your Distionaray,So Stay Tuned! '
+          'Uploaded successfully! Your Blog is uploaded! '
         );
       });
   }
 
   render() {
     return (
+      <div class='containerpk'>
+      <div class="row">
+   
+      <div className='profile-header'>
+       
+        
+      </div>
+      </div>
       <div className='container mt-4'>
+       
         <h4 className='display-4 text-centre mb-4'>
           <i className='fas fa-upload'></i>
-          Upload a Gesture
+          Upload a Blog
         </h4>
         <form onSubmit={this.onSubmit}>
           <div class='form-group'>
@@ -80,30 +90,23 @@ export default class FilesUploadComponent extends Component {
             <input
               type='value'
               className='form-control'
-              placeholder='Gesture Name'
+              placeholder='Blog Name'
               //value={this.state.gestureName}
               onChange={this.onNameChange}
             />
           </div>
-
-          <div className='form-group'>
-            <input
-              type='value'
-              className='form-control'
-              placeholder='Region'
-               value={this.state.Region}
-               onChange={this.onRegionChange}
-            />
-          </div>
           <div className='custom-file'>
+       
+
             <input
               type='file'
-              className='custom-file-input'
-              id='customFile'
-              onChange={this.onFileChange}
+              id='image'
+               className='custom-file-input'
+              name='image'
+              onChange={(e) => this.onFileChange(e)}
             />
             <label className='custom-file-label' for='customFile'>
-              Choose file
+              Choose image
             </label>
           </div>
 
@@ -115,6 +118,16 @@ export default class FilesUploadComponent extends Component {
             </Progress>
           </div>
           <div className='form-group'>
+          <textarea
+              
+              className='form-control'
+              placeholder='Write your Blog.......'
+               value={this.state.Text}
+               onChange={this.onTextChange}
+            />
+          </div>
+          
+          <div className='form-group'>
             <button className='btn btn-primary' type='submit'>
               Upload
             </button>
@@ -123,6 +136,7 @@ export default class FilesUploadComponent extends Component {
             </Link>
           </div>
         </form>
+      </div>
       </div>
     );
   }

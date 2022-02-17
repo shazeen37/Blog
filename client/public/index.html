@@ -70,19 +70,28 @@
     ></script>
 
     <script>
-      $('.navi ul li').click(function () {
-        $(this).addClass('active').siblings().removclass('active');
-      });
-      const tabBtn = document.querySelectorAll('.navi ul li');
-      const tab = document.querySelectorAll('.tab');
+     // Shrink the navbar 
+     navbarShrink();
 
-      function tabs(panelIndex) {
-        tab.forEach(function (node) {
-          node.style.display = 'none';
-        });
-        tabs[panelIndex] ? tabs[panelIndex].style.display = 'block': null;
-      }
-      tabs(0);
+// Shrink the navbar when page is scrolled
+document.addEventListener('scroll', navbarShrink);
+
+// Activate Bootstrap scrollspy on the main nav element
+const mainNav = document.body.querySelector('#mainNav');
+
+
+// Collapse responsive navbar when toggler is visible
+const navbarToggler = document.body.querySelector('.navbar-toggler');
+const responsiveNavItems = [].slice.call(
+    document.querySelectorAll('#navbarResponsive .nav-link')
+);
+responsiveNavItems.map(function (responsiveNavItem) {
+    responsiveNavItem.addEventListener('click', () => {
+        if (window.getComputedStyle(navbarToggler).display !== 'none') {
+            navbarToggler.click();
+        }
+    });
+});
     </script>
   </body>
 </html>

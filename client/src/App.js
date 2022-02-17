@@ -19,10 +19,13 @@ import Dictionary from './components/dictionary';
 import Translator from './components/translator';
 import Sentence  from './components/Sentence';
 import Footer from './components/layout/footer';
+import View from './components/dashboard/view';
+import Edit from './components/profile-form/Editupload';
+import Allblogs from './components/dashboard/Allblog';
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { loadUser } from './actions/auth';
 
 import './App.css';
@@ -44,15 +47,14 @@ const App = () => {
   
           <Navbar />
           <Route exact path='/' component={Landing} />
-          <Route exact path='/' component={cards} />
-          <Route exact path='/' component={Aboutus} />
-          <Route exact path='/' component={Ourteam} />
+     
 
           <PrivateRoute exact path='/dashboard' component={Dashboard} />
-          <section className='container'>
+          <div >
             <Alerts />
             <Switch>
               <Route exact path='/register' component={Register} />
+              <Route exact path='/Allblogs' component={Allblogs} />
               <Route exact path='/Profiles' component={Profiles} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/dictionary' component={Dictionary} />
@@ -74,9 +76,11 @@ const App = () => {
                 component={Editprofile}
               />
               <PrivateRoute exact path='/upload' component={upload} />
+              <Route exact path='/view/:id' component={View} />
+              <Route exact path='/edit/:id' component={Edit} />
             </Switch>
-          </section>
-          <Footer/>
+          </div>
+        
         </Fragment>
       </Router>
     </Provider>
