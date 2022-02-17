@@ -43,7 +43,7 @@ router.post('/', auth, upload.single('image'), async (req, res, next) => {
   const userupload = new uploads({
     user: req.user.id,
     Name: req.body.Name,
-    image: url + '/public/' + req.file.filename,
+    image: 'https://cookingblog25.herokuapp.com' + '/public/' + req.file.filename,
     Text:req.body.Text,
   });
 
